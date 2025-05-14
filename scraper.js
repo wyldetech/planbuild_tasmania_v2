@@ -4,6 +4,46 @@ var cheerio = require("cheerio");
 var request = require("request");
 var sqlite3 = require("sqlite3").verbose();
 
+const { Builder, By } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+
+const options = new chrome.Options();
+options.addArguments('--headless', '--disable-gpu', '--no-sandbox');
+
+(async function scrapeAdvertisements() {
+    let driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
+
+    try {
+        const url = "https://portal.planbuild.tas.gov.au/external/advertisement/search";
+        await driver.get(url);
+
+        // Wait for the page to load (adjust the timeout as needed)
+        await driver.sleep(10000);
+
+        // Find all rows with the specified CSS class
+        const rows = await driver.findElements(By.css('.row.advertisement-result-row'));
+
+        for (let row of rows) {
+            // Extract the ID from the row's 'id' attribute
+            const advertisementId = await row.getAttribute('id');
+            if (!advertisementId) continue;
+
+            // Construct the detail page URL
+            const detailUrl = `https://portal.planbuild.tas.gov.au/external/advertisement/${advertisementId}`;
+            console.log(`Fetching details for ID: ${advertisementId} from ${detailUrl}`);
+        }
+    } catch (error) {
+        console.error('An error occurred:', error);
+    } finally {
+        // Quit the WebDriver instance
+        await driver.quit();
+    }
+})();
+
+
+
+/*
+
 function initDatabase(callback) {
 	// Set up sqlite database.
 	var db = new sqlite3.Database("data.sqlite");
@@ -57,3 +97,4 @@ function run(db) {
 }
 
 initDatabase(run);
+*/
