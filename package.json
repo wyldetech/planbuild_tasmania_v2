@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "main": "scraper.js",
   "dependencies": {
-    "cheerio": "latest",
-    "request": "latest",
-    "sqlite3": "latest",
-    "selenium-webdriver": "latest"
+    "cheerio": "1.0.0-rc.12",
+    "request": "2.88.2",
+    "sqlite3": "5.1.6",
+    "selenium-webdriver": "4.12.0"
   },
   "keywords": [
     "scraper",
