@@ -2,17 +2,17 @@
   "version": "0.0.1",
   "main": "scraper.js",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "request": "^2.88.2",
-    "sqlite3": "^5.1.6",
-    "selenium-webdriver": "^4.12.0"
+    "cheerio": "1.0.0-rc.12",
+    "request": "2.88.2",
+    "sqlite3": "5.1.6",
+    "selenium-webdriver": "4.12.0"
   },
   "keywords": [
     "scraper",
     "morph"
   ],
   "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=8.0.0"
+    "node": "16.0.0",
+    "npm": "8.0.0"
   }
 }
